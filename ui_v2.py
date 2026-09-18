@@ -242,6 +242,49 @@ section[data-testid="stSidebar"] .planx-brand-sub { color:#806e50; font-size:13p
   .planx-card-value { font-size:23px; }
 }
 </style>
+<style>
+/* StockDash dashboard visual system — clean blue financial dashboard */
+:root {
+  --dash-bg:#F4F7FB; --dash-surface:#FFFFFF; --dash-line:#E3EAF3;
+  --dash-text:#14233D; --dash-muted:#718096; --dash-navy:#17375E;
+  --dash-blue:#2563EB; --dash-green:#059669; --dash-red:#E5484D;
+}
+.stApp { background:var(--dash-bg) !important; color:var(--dash-text); }
+.block-container { max-width:1480px !important; padding-top:1.1rem !important; padding-bottom:3rem !important; }
+section[data-testid="stSidebar"] { background:#FFFFFF !important; border-right:1px solid var(--dash-line) !important; }
+.planx-brand { margin:4px 0 22px !important; }
+.planx-brand-mark { background:linear-gradient(135deg,#17375E,#2563EB) !important; width:38px !important; height:38px !important; }
+.planx-brand-title { color:#14233D !important; }
+.planx-brand-sub { color:#94A3B8 !important; }
+.planx-hero {
+  background:linear-gradient(110deg,#17375E 0%,#1F4F83 62%,#2C6BAA 100%) !important;
+  border:0 !important; border-radius:18px !important; padding:24px 28px !important;
+  margin-bottom:18px !important; box-shadow:0 12px 28px rgba(23,55,94,.15) !important;
+}
+.planx-eyebrow { color:#B9D7FF !important; }
+.planx-hero h1 { color:#FFFFFF !important; font-size:30px !important; }
+.planx-hero p { color:#DCEBFA !important; }
+[data-testid="stMetric"] {
+  background:#FFFFFF !important; border:1px solid var(--dash-line) !important;
+  border-radius:14px !important; padding:15px 18px !important;
+  box-shadow:0 5px 18px rgba(20,35,61,.045) !important;
+}
+[data-testid="stMetricLabel"] { color:#718096 !important; }
+[data-testid="stMetricValue"] { color:#14233D !important; font-weight:800 !important; }
+[data-testid="stVerticalBlockBorderWrapper"] {
+  border-color:var(--dash-line) !important; border-radius:14px !important;
+  background:#FFFFFF !important; box-shadow:0 5px 18px rgba(20,35,61,.035) !important;
+}
+.stButton > button, .stFormSubmitButton > button { border-radius:10px !important; font-weight:700 !important; }
+.stButton > button[kind="primary"], .stFormSubmitButton > button[kind="primary"] {
+  background:#2563EB !important; border-color:#2563EB !important; color:#FFFFFF !important;
+}
+.stDataFrame { border:1px solid var(--dash-line) !important; border-radius:12px !important; overflow:hidden; }
+.stTabs [data-baseweb="tab-list"] { gap:5px; border-bottom:1px solid var(--dash-line); }
+.stTabs [data-baseweb="tab"] { border-radius:9px 9px 0 0; padding:9px 13px; }
+.stTabs [aria-selected="true"] { color:#2563EB !important; }
+hr { border-color:var(--dash-line) !important; }
+</style>
 """,
         unsafe_allow_html=True,
     )
