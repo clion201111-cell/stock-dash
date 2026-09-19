@@ -288,6 +288,7 @@ hr { border-color:var(--dash-line) !important; }
 """,
         unsafe_allow_html=True,
     )
+    apply_final_polish()
 
 
 def brand():
