@@ -351,3 +351,17 @@ def source_badge(label: str, state: str = "wait"):
         f'<span class="planx-source {cls}">{html.escape(label)}</span>',
         unsafe_allow_html=True,
     )
+
+<style>
+/* Final dashboard polish */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label{margin:2px 0;border:1px solid transparent!important}
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked){background:#EFF6FF!important;border-color:#BFDBFE!important;box-shadow:inset 3px 0 #2563EB!important}
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) p{color:#1D4ED8!important}
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label p{font-size:14px!important}
+.planx-card{transition:transform .15s ease,box-shadow .15s ease;border-color:#E3EAF3!important}
+.planx-card:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(20,35,61,.07)}
+.stTabs [data-baseweb="tab"]{font-weight:650}
+.stTabs [aria-selected="true"]{border-bottom:2px solid #2563EB!important}
+[data-testid="stExpander"]{border-color:#E3EAF3!important;background:#FFFFFF!important;border-radius:12px!important}
+.stTextInput input,.stTextArea textarea{background:#FFFFFF!important;border-color:#D9E2EF!important}
+</style>
