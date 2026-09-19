@@ -68,6 +68,7 @@ def render_research(store, state, sample_mode):
                     except (ValueError, KeyError, TypeError): st.error('조사 파일의 형식·출처·기간을 확인하세요. 기존 결과는 유지했습니다.')
                     except Exception: st.error('저장에 실패했습니다. 기존 결과는 유지했습니다.')
     if not stocks:
+        dashboard_overview({}, st.session_state.get('account_snapshot'))
         with st.container(border=True):
             st.subheader('첫 관심종목을 담아보세요')
             st.write('위의 종목 추가를 열고 기업 이름 하나만 입력하면 시작할 수 있습니다.')
