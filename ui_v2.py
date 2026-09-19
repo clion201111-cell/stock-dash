@@ -352,6 +352,11 @@ def source_badge(label: str, state: str = "wait"):
         unsafe_allow_html=True,
     )
 
+
+
+def apply_final_polish():
+    st.markdown(
+        """
 <style>
 /* Final dashboard polish */
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label{margin:2px 0;border:1px solid transparent!important}
@@ -365,3 +370,6 @@ def source_badge(label: str, state: str = "wait"):
 [data-testid="stExpander"]{border-color:#E3EAF3!important;background:#FFFFFF!important;border-radius:12px!important}
 .stTextInput input,.stTextArea textarea{background:#FFFFFF!important;border-color:#D9E2EF!important}
 </style>
+""",
+        unsafe_allow_html=True,
+    )
