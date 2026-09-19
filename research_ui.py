@@ -7,12 +7,14 @@ import streamlit as st
 
 from ui_v2 import hero, card
 from automatic import brief
-from bi_view import theme, overview, detail, peers_chart
+from bi_view import theme, detail, peers_chart
+from dashboard_ui import dashboard_overview, inject_dashboard_css
 from chat_research import published, parse_bundle, trends, growth, request_text
 
 
 def render_research(store, state, sample_mode):
     theme()
+    inject_dashboard_css()
     st.markdown("""
     <style>
     .dashboard-section { margin: 6px 0 10px; font-size: 18px; font-weight: 800; color:#17375E; }
@@ -87,7 +89,7 @@ def render_research(store, state, sample_mode):
                '적정주가 참고':f"{v['base']:,.0f}원" if v else '조사 필요',
                '일봉':trend['daily'], '주봉':trend['weekly'], '조사일':r.get('as_of','미조사')}
         rows.append(row);details[key]=(stock, r, trend, frame)
-    overview(details, st.session_state.get('account_snapshot'))
+    dashboard_overview(details, st.session_state.get('account_snapshot'))
     with st.expander('전체 지표 비교'):
         st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
     st.markdown('### 기업 하나를 깊게 보기')
