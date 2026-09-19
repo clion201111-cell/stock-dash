@@ -8,6 +8,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from market_data import load_market_indices
+
 
 BLUE = "#2563EB"
 NAVY = "#163B68"
@@ -79,6 +81,26 @@ def dashboard_overview(details, snapshot):
     k2.metric("투자원금", _money(invested))
     k3.metric("평가손익", _money(pnl), None if return_pct is None else f"{return_pct:+.2f}%")
     k4.metric("분석된 종목", f"{len(reports)}개", f"관심종목 {len(details)}개")
+
+    market = load_market_indices()
+    with st.container(border=True):
+        _panel_title("◎", "주요 시장지수", "공공데이터포털 · 15분 캐시")
+        index_by_name = {row["name"]: row for row in market["rows"]}
+        m1, m2, m3, m4 = st.columns(4)
+        for col, name in zip((m1, m2), ("KOSPI", "KOSDAQ")):
+            row = index_by_name.get(name)
+            if row and row.get("close") is not None:
+                delta = None if row.get("rate") is None else f"{row['rate']:+.2f}%"
+                col.metric(name, f"{row['close']:,.2f}", delta)
+                col.caption("기준일 " + row["date"])
+            else:
+                col.metric(name, "연결 확인 필요")
+        m3.metric("원/달러", "추가 API 필요")
+        m3.caption("현재 연결 키의 제공 범위 밖")
+        m4.metric("S&P 500", "추가 API 필요")
+        m4.caption("공식 해외지수 소스 연결 필요")
+        if market.get("error"):
+            st.caption(market["error"])
 
     main, side = st.columns([2.25, 1], gap="large")
     with main:
@@ -152,6 +174,16 @@ def dashboard_overview(details, snapshot):
     with side:
         with st.container(border=True):
             _panel_title("◎", "오늘의 투자판단", "확정자료 기반")
+            market_rows = market.get("rows", [])
+            if market_rows:
+                positive = sum(1 for row in market_rows if (row.get("rate") or 0) > 0)
+                negative = sum(1 for row in market_rows if (row.get("rate") or 0) < 0)
+                if positive == len(market_rows):
+                    st.success("국내 주요 지수가 함께 상승했습니다. 종목 실적과 공시를 함께 확인하세요.")
+                elif negative == len(market_rows):
+                    st.warning("국내 주요 지수가 함께 하락했습니다. 계좌 비중과 변동성을 먼저 점검하세요.")
+                else:
+                    st.info("KOSPI와 KOSDAQ 흐름이 엇갈립니다. 시장보다 기업별 근거를 우선 확인하세요.")
             if not reports:
                 st.info("관심종목을 분석하면 판단 체크포인트가 표시됩니다.")
             else:
